@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>pandunia</title>
+<script src="jquery-3.4.1.min.js"></script>
+<script>var pd = {}; var nenomesoden = null;</script>
+<script src="pd.js"></script>
+<script>
+$(function() {
+	var harf = {};
+	var bax = {};
+	var nombr = 0;
+	for (var leks in pd) {
+		var h = leks.substr(0, 1);
+		nombr ++;
+		harf[h] = true;
+		for (var b in pd[leks]) {
+			bax[b] = true;
+		}
+	}
+	for (var h in harf) {
+		$('#harf').append('<button onclick="harfa(this)">' + h + '</button>');
+	}
+	for (var b in bax) {
+		$('#serc').append('<button onclick="serca(this)">' + b + '</button>');
+	}
+	$('#nenomesoden').text(nenomesoden.getFullYear() + ' nene ' + (nenomesoden.getMonth() + 1) + ' mese ' + nenomesoden.getDate() + ' dene');
+	$('#nombr').text(nombr + ' lekse');
+});
+function harfa(botono) {
+	var harfe = $(botono).text();
+	$('#leks').html('');
+	for (var leks in pd) {
+		var h = leks.substr(0, 1);
+		if (h == harfe) {
+			var $p = $('<p></p>');
+			$p.append('<strong>' + leks + '</strong><br>');
+			for (var b in pd[leks]) {
+				$p.append('<em>' + b + ': </em>' + pd[leks][b] + '<br>');
+			}
+			$('#leks').append($p);
+		}
+	}
+}
+function serca(botono) {
+	var lekse = $('input[name=lekse]').val();
+	var baxe = $(botono).text();
+	$('#leks').html('');
+	var i = 0;
+	for (var leks in pd) {
+		var isb = false;
+		if (baxe == '' || baxe == 'pan' || baxe == 'pd') {
+			isb = (leks.indexOf(lekse) >= 0);
+		}
+		if (! isb) {
+			for (var b in pd[leks]) {
+				if (pd[leks][b].indexOf(lekse) >= 0 && (baxe == '' || baxe == 'pan' || baxe == b)) {
+					isb = true;
+					break;
+				}
+			}
+		}
+		if (isb) {
+			var $p = $('<p></p>');
+			$p.append('<strong>' + leks + '</strong><br>');
+			for (var b in pd[leks]) {
+				$p.append('<em>' + b + ': </em>' + pd[leks][b] + '<br>');
+			}
+			$('#leks').append($p);
+			i ++;
+			if (i > 100) break;
+		}
+	}
+}
+</script>
+</head>
+<body style="overflow-y:scroll; background:#eee;">
+<div style="display:flex; justify-content:center;">
+<div style="display:block; background:#fff; padding:10px 20px; box-shadow:5px 5px 5px rgba(0,0,0,0.2);">
+<p style="text-align:right;"><span id="nenomesoden"></span>, <span id="nombr"></span>.</p>
+<p id="harf"></p>
+<p id="serc" style="display:flex;"><input style="flex-grow:1;" onkeyup="serca(this)" type="text" name="lekse" placeholder="serce"><button onclick="serca(this)">pan</button><button onclick="serca(this)">pd</button></p>
+<p id="leks" style="max-width:550px;"></p>
+</div>
+</div>
+</body>
+</html>
