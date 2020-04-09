@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>pandunia</title>
-<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="jquery-3.4.1.min.js"></script>
 <script>var pd = {}; var nenomesoden = null;</script>
 <script src="pd.js"></script>
@@ -52,11 +52,11 @@ function serca(botono) {
 	for (var leks in pd) {
 		var isb = false;
 		if (baxe == '' || baxe == 'pan' || baxe == 'pd') {
-			isb = (leks.indexOf(lekse) >= 0);
+			isb = (leks.toLowerCase().indexOf(lekse.toLowerCase()) >= 0);
 		}
 		if (! isb) {
 			for (var b in pd[leks]) {
-				if (pd[leks][b].indexOf(lekse) >= 0 && (baxe == '' || baxe == 'pan' || baxe == b)) {
+				if (pd[leks][b].toLowerCase().indexOf(lekse.toLowerCase()) >= 0 && (baxe == '' || baxe == 'pan' || baxe == b)) {
 					isb = true;
 					break;
 				}
@@ -81,7 +81,7 @@ function serca(botono) {
 <div style="display:block; background:#fff; padding:10px 20px; box-shadow:5px 5px 5px rgba(0,0,0,0.2);">
 <p style="text-align:right;"><span id="nenomesoden"></span>, <span id="nombr"></span>.</p>
 <p id="harf"></p>
-<p id="serc" style="display:flex;"><input style="flex-grow:1;" onkeyup="serca(this)" type="text" name="lekse" placeholder="serce"><button onclick="serca(this)">pan</button><button onclick="serca(this)">pd</button></p>
+<p id="serc"><input onkeyup="serca(this)" type="text" name="lekse" placeholder="serce"><button onclick="serca(this)">pan</button><button onclick="serca(this)">pd</button></p>
 <p id="leks" style="max-width:550px;"></p>
 </div>
 </div>
