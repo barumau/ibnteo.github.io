@@ -1,9 +1,9 @@
 # Pandunia
 
-pd: [leksoliste](index.html)
-en: dictionary (word list)
-eo: vortaro
-es: disionario (lexicón)
-fi: sanaluettelo
-pl: lista słów
-ru: словарь
+**[leksoliste](index.html)**  
+_en:_ dictionary (word list)  
+_eo:_ vortaro  
+_es:_ disionario (lexicón)  
+_fi:_ sanaluettelo  
+_pl:_ lista słów  
+_ru:_ словарь  
