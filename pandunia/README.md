@@ -1,6 +1,6 @@
 # Pandunia
 
-**[leksoliste](index.html)**  
+**[leksoliste](https://ibnteo.github.io/pandunia/)**  
 _en:_ dictionary (word list)  
 _eo:_ vortaro  
 _es:_ disionario (lexicón)  
