@@ -21,7 +21,6 @@ function lada() {
 		}
 	}
 	var harf = {};
-	//var bax = {};
 	var klas = {};
 	var nombr = 0;
 	for (var leks in pd) {
@@ -29,9 +28,6 @@ function lada() {
 		nombr ++;
 		harf[h] = true;
 		if (typeof(pd[leks]['klase']) != 'undefined') klas[pd[leks]['klase']] = true;
-		/*for (var b in pd[leks]) {
-			bax[b] = true;
-		}*/
 	}
 	for (var h in harf) {
 		var button = document.createElement('button');
@@ -45,7 +41,7 @@ function lada() {
 		button.innerText = k;
 		document.getElementById('klas').appendChild(button);
 	}
-	for (var m=2; m<maidane.length; m++) {
+	for (var m=0; m<maidane.length; m++) {
 		if (maidane[m] != '') {
 			var button = document.createElement('button');
 			button.setAttribute('onclick', 'serca(this)');
@@ -119,12 +115,10 @@ function serca(botono) {
 			}
 		}
 		if (isb) {
-			/*var $p = $('<p></p>');
-			$p.append('<strong>' + leks + '</strong><br>');
-			for (var b in pd[leks]) {
-				$p.append('<em>' + b + ': </em>' + pd[leks][b] + '<br>');
+			if (i > 300) {
+				document.getElementById('leks').appendChild(document.createTextNode('...'));
+				break;
 			}
-			$('#leks').append($p);*/
 			var p = document.createElement('p');
 			var strong = document.createElement('strong');
 			strong.innerText = leks;
@@ -139,7 +133,6 @@ function serca(botono) {
 			}
 			document.getElementById('leks').appendChild(p);
 			i ++;
-			if (i > 100) break;
 		}
 	}
 }
@@ -151,9 +144,8 @@ function serca(botono) {
 <p style="text-align:right;"><span id="nenomesoden"></span>, <span id="nombr"></span>.</p>
 <p id="harf"></p>
 <p id="klas"></p>
-<p id="serc"></p>
-<p><input onkeyup="serca(this)" type="text" name="lekse" id="lekse" size="40" placeholder="serce"><button onclick="serca(this)">pan</button> o ^</p>
-<p id="leks" style="max-width:550px;"></p>
+<p id="serc" style="max-width:700px;"><input onkeyup="serca(this)" type="text" name="lekse" id="lekse" size="40" placeholder="serce"><button onclick="serca(this)">pan</button></p>
+<p id="leks" style="max-width:700px;"></p>
 </div>
 </div>
 <div style="display:none;" id="csv" data-date="2020-03-30">
