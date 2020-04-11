@@ -1,9 +1,8 @@
 # Pandunia
 
 **[leksoliste](https://ibnteo.github.io/pandunia/)**  
-_en:_ dictionary (word list)  
-_eo:_ vortaro  
-_es:_ disionario (lexicón)  
-_fi:_ sanaluettelo  
-_pl:_ lista słów  
-_ru:_ словарь  
+_engli:_ dictionary (word list)  
+_espani:_ disionario (lexicón)  
+_esperanti:_ vortaro  
+_suomi:_ sanaluettelo  
+_polski:_ lista słów  
