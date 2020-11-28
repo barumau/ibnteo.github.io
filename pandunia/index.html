@@ -36,10 +36,12 @@ function lada() {
 		document.getElementById('harf').appendChild(button);
 	}
 	for (var k in klas) {
-		var button = document.createElement('button');
-		button.setAttribute('onclick', 'klasa(this)');
-		button.innerText = k;
-		document.getElementById('klas').appendChild(button);
+		if (k.indexOf('planete ') != 0) {
+			var button = document.createElement('button');
+			button.setAttribute('onclick', 'klasa(this)');
+			button.innerText = k;
+			document.getElementById('klas').appendChild(button);
+		}
 	}
 	for (var m=0; m<maidane.length; m++) {
 		if (maidane[m] != '') {
