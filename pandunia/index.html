@@ -43,6 +43,12 @@ function lada() {
 			document.getElementById('klas').appendChild(button);
 		}
 	}
+	{
+		var button = document.createElement('button');
+		button.setAttribute('onclick', "serca_lekse('planete ', 'klase')");
+		button.innerText = 'planete';
+		document.getElementById('klas').appendChild(button);
+	}
 	for (var m=0; m<maidane.length; m++) {
 		if (maidane[m] != '') {
 			var button = document.createElement('button');
@@ -100,8 +106,13 @@ function klasa(botono) {
 function serca(botono) {
 	var lekse = document.getElementById('lekse').value;
 	var baxe = botono.innerText;
-	console.log(baxe);
 	document.getElementById('leks').innerText = '';
+	serca_lekse(lekse, baxe);
+}
+function serca_lekse(lekse, baxe) {
+	//var lekse = document.getElementById('lekse').value;
+	//var baxe = botono.innerText;
+	//document.getElementById('leks').innerText = '';
 	var i = 0;
 	for (var leks in pd) {
 		var isb = false;
