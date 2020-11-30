@@ -106,13 +106,10 @@ function klasa(botono) {
 function serca(botono) {
 	var lekse = document.getElementById('lekse').value;
 	var baxe = botono.innerText;
-	document.getElementById('leks').innerText = '';
 	serca_lekse(lekse, baxe);
 }
 function serca_lekse(lekse, baxe) {
-	//var lekse = document.getElementById('lekse').value;
-	//var baxe = botono.innerText;
-	//document.getElementById('leks').innerText = '';
+	document.getElementById('leks').innerText = '';
 	var i = 0;
 	for (var leks in pd) {
 		var isb = false;
