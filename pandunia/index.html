@@ -24,7 +24,7 @@ function lada() {
 	var klas = {};
 	var nombr = 0;
 	for (var leks in pd) {
-		var h = leks.substr(0, 1);
+		var h = leks.substr(0, 1).toUpperCase();
 		nombr ++;
 		harf[h] = true;
 		if (typeof(pd[leks]['klase']) != 'undefined') klas[pd[leks]['klase']] = true;
@@ -64,7 +64,7 @@ function harfa(botono) {
 	var harfe = botono.innerText;
 	document.getElementById('leks').innerText = '';
 	for (var leks in pd) {
-		var h = leks.substr(0, 1);
+		var h = leks.substr(0, 1).toUpperCase();
 		if (h == harfe) {
 			var p = document.createElement('p');
 			var strong = document.createElement('strong');
