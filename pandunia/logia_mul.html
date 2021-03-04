@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>pandunia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+var pd = {};
+function lada() {
+	var csv = document.getElementById('csv').innerText.split('\n');
+	var maidane = csv[1].split('|');
+	for (var i=3; i<csv.length; i++) {
+		var m = csv[i].split('|');
+		if (m[0] != '') {
+			pd[m[0]] = {};
+			for (var j=1; j<m.length; j++) {
+				if (maidane.length > j && maidane[j] != '' && m[j] != '') {
+					pd[m[0]][maidane[j]] = m[j];
+				}
+			}
+		}
+	}
+	var harf = {};
+	var klas = {};
+	var nombr = 0;
+	for (var leks in pd) {
+		var h = leks.substr(0, 1).toUpperCase();
+		nombr ++;
+		harf[h] = true;
+		if (typeof(pd[leks]['klase']) != 'undefined') klas[pd[leks]['klase']] = true;
+	}
+	for (var h in harf) {
+		var button = document.createElement('button');
+		button.setAttribute('onclick', 'harfa(this)');
+		button.innerText = h;
+		document.getElementById('harf').appendChild(button);
+	}
+	for (var k in klas) {
+		if (k.indexOf('planete ') != 0) {
+			var button = document.createElement('button');
+			button.setAttribute('onclick', 'klasa(this)');
+			button.innerText = k;
+			document.getElementById('klas').appendChild(button);
+		}
+	}
+	{
+		var button = document.createElement('button');
+		button.setAttribute('onclick', "serca_lekse('planete ', 'klase')");
+		button.innerText = 'planete';
+		document.getElementById('klas').appendChild(button);
+	}
+	for (var m=0; m<maidane.length; m++) {
+		if (maidane[m] != '') {
+			var button = document.createElement('button');
+			button.setAttribute('onclick', 'serca(this)');
+			button.innerText = maidane[m];
+			document.getElementById('serc').appendChild(button);
+		}
+	}
+	document.getElementById('nenomesoden').innerText = document.getElementById('csv').getAttribute('data-date');
+	document.getElementById('nombr').innerText = nombr + ' leks';
+}
+function harfa(botono) {
+	var harfe = botono.innerText;
+	document.getElementById('leks').innerText = '';
+	for (var leks in pd) {
+		var h = leks.substr(0, 1).toUpperCase();
+		if (h == harfe) {
+			var p = document.createElement('p');
+			var strong = document.createElement('strong');
+			strong.innerText = leks;
+			p.appendChild(strong);
+			p.appendChild(document.createElement('br'));
+			for (var b in pd[leks]) {
+				var em = document.createElement('em');
+				em.innerText = b + ': ';
+				p.appendChild(em);
+				p.appendChild(document.createTextNode(pd[leks][b]));
+				p.appendChild(document.createElement('br'));
+			}
+			document.getElementById('leks').appendChild(p);
+		}
+	}
+}
+function klasa(botono) {
+	var klase = botono.innerText;
+	document.getElementById('leks').innerText = '';
+	for (var leks in pd) {
+		if (pd[leks]['klase'] == klase) {
+			var p = document.createElement('p');
+			var strong = document.createElement('strong');
+			strong.innerText = leks;
+			p.appendChild(strong);
+			p.appendChild(document.createElement('br'));
+			for (var b in pd[leks]) {
+				var em = document.createElement('em');
+				em.innerText = b + ': ';
+				p.appendChild(em);
+				p.appendChild(document.createTextNode(pd[leks][b]));
+				p.appendChild(document.createElement('br'));
+			}
+			document.getElementById('leks').appendChild(p);
+		}
+	}
+}
+function serca(botono) {
+	var lekse = document.getElementById('lekse').value;
+	var baxe = botono.innerText;
+	serca_lekse(lekse, baxe);
+}
+function serca_lekse(lekse, baxe) {
+	document.getElementById('leks').innerText = '';
+	var i = 0;
+	for (var leks in pd) {
+		var isb = false;
+		if (baxe == '' || baxe == 'pan' || baxe == 'ratibe') {
+			isb = (leks.toLowerCase().indexOf(lekse.toLowerCase()) >= 0);
+		}
+		if (! isb) {
+			for (var b in pd[leks]) {
+				if (pd[leks][b].toLowerCase().indexOf(lekse.toLowerCase()) >= 0 && (baxe == '' || baxe == 'pan' || baxe == b)) {
+					isb = true;
+					break;
+				}
+			}
+		}
+		if (isb) {
+			if (i > 100) {
+				document.getElementById('leks').appendChild(document.createTextNode('...'));
+				break;
+			}
+			var p = document.createElement('p');
+			var strong = document.createElement('strong');
+			strong.innerText = leks;
+			p.appendChild(strong);
+			p.appendChild(document.createElement('br'));
+			for (var b in pd[leks]) {
+				var em = document.createElement('em');
+				em.innerText = b + ': ';
+				p.appendChild(em);
+				p.appendChild(document.createTextNode(pd[leks][b]));
+				p.appendChild(document.createElement('br'));
+			}
+			document.getElementById('leks').appendChild(p);
+			i ++;
+		}
+	}
+}
+</script>
+</head>
+<body style="overflow-y:scroll; background:#eee;" onload="lada()">
+<div style="display:flex; justify-content:center;">
+<div style="display:block; background:#fff; padding:10px 20px; box-shadow:5px 5px 5px rgba(0,0,0,0.2);">
+<p style="float:right;"><small style="margin-left:10px; margin-top:3px; display:inline-block;"><span id="nenomesoden"></span>, <span id="nombr"></span></small></p>
+<p id="harf"></p>
+<p id="klas"></p>
+<p id="serc" style="max-width:700px;"><input onkeyup="serca(this)" type="text" name="lekse" id="lekse" size="40" placeholder="serce"><button onclick="serca(this)">pan</button></p>
+<p id="leks" style="max-width:700px;"></p>
+</div>
+</div>
+<div style="display:none;" id="csv" data-date="2021-01-30">
